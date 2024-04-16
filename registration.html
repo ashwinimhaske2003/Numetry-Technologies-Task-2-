@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Page</title>
+    <link rel="stylesheet" href="r.css">
+
+    <script>
+        function registerUser() {
+            var id = document.getElementById('id').value;
+            var name = document.getElementById('name').value;
+            var username = document.getElementById('username').value;
+            var mobileno = document.getElementById('mobileno').value;
+            var email = document.getElementById('email').value;
+
+            var user = {
+                id: id,
+                name: name,
+                username: username,
+                mobileno: mobileno,
+                email: email
+            };
+
+            // Retrieve existing users from sessionStorage
+            var users = JSON.parse(sessionStorage.getItem('users')) || [];
+            users.push(user);
+
+            // Save the updated users array back to sessionStorage
+            sessionStorage.setItem('users', JSON.stringify(users));
+
+            // Redirect to login page
+            window.location.href = "login.html";
+        }
+    </script>
+</head>
+<body>
+    <h2>Registration Form</h2>
+   <div class="container">
+
+<form>
+        <label for="id">ID:</label><br>
+        <input type="text" id="id" name="id"><br>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="mobileno">Mobile No:</label><br>
+        <input type="text" id="mobileno" name="mobileno"><br>
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br><br>
+        <button type="button" onclick="registerUser()">Register</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="d.css">
+
+    <script>
+        function displayUsers() {
+            var users = JSON.parse(sessionStorage.getItem('users')) || [];
+
+            var table = document.getElementById('userTable');
+            table.innerHTML = ''; // Clear existing table content
+
+            // Create table headings
+            var row = table.insertRow();
+            row.insertCell(0).textContent = "ID";
+            row.insertCell(1).textContent = "Name";
+            row.insertCell(2).textContent = "Username";
+            row.insertCell(3).textContent = "Email";
+            row.insertCell(4).textContent = "Mobile No";
+            row.insertCell(5).textContent = "Edit";
+            row.insertCell(6).textContent = "Delete";
+
+            users.forEach(function(user) {
+                var row = table.insertRow();
+                row.insertCell(0).textContent = user.id;
+                row.insertCell(1).textContent = user.name;
+                row.insertCell(2).textContent = user.username;
+                row.insertCell(3).textContent = user.email;
+                row.insertCell(4).textContent = user.mobileno;
+
+                // Add edit button
+                var editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.onclick = function() {
+                    editUser(user);
+                };
+                row.insertCell(5).appendChild(editButton);
+
+                // Add delete button
+                var deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Delete';
+                deleteButton.onclick = function() {
+                    deleteUser(user.id);
+                };
+                row.insertCell(6).appendChild(deleteButton);
+            });
+        }
+
+        function editUser(user) {
+            // Populate form with user data for editing
+            document.getElementById('name').value = user.name;
+            document.getElementById('username').value = user.username;
+            document.getElementById('mobileno').value = user.mobileno;
+            document.getElementById('email').value = user.email;
+
+            // Show the edit form
+            document.getElementById('editFormContainer').style.display = 'block';
+
+            // Save changes button functionality
+            document.getElementById('saveChanges').onclick = function() {
+                updateUser(user.id);
+            };
+
+            // Cancel button functionality
+            document.getElementById('cancelEdit').onclick = function() {
+                // Hide the edit form
+                document.getElementById('editFormContainer').style.display = 'none';
+            };
+        }
+
+        function deleteUser(id) {
+            var users = JSON.parse(sessionStorage.getItem('users')) || [];
+            var updatedUsers = users.filter(function(user) {
+                return user.id != id;
+            });
+            sessionStorage.setItem('users', JSON.stringify(updatedUsers));
+            displayUsers(); // Refresh table
+        }
+
+        function updateUser(id) {
+            var name = document.getElementById('name').value;
+            var username = document.getElementById('username').value;
+            var mobileno = document.getElementById('mobileno').value;
+            var email = document.getElementById('email').value;
+
+            var users = JSON.parse(sessionStorage.getItem('users')) || [];
+            var updatedUsers = users.map(function(user) {
+                if (user.id == id) {
+                    user.name = name;
+                    user.username = username;
+                    user.mobileno = mobileno;
+                    user.email = email;
+                }
+                return user;
+            });
+            sessionStorage.setItem('users', JSON.stringify(updatedUsers));
+            displayUsers(); // Refresh table
+
+            // Hide the edit form after saving changes
+            document.getElementById('editFormContainer').style.display = 'none';
+        }
+
+        // Display users on page load
+        window.onload = displayUsers;
+    </script>
+</head>
+<body><br>
+    <h2>User Dashboard</h2><br>
+    <table id="userTable" border="1">
+        
+    </table>
+    <div id="editFormContainer" style="display:none;">
+        <h2>Edit User</h2>
+        <form id="editForm">
+            <label for="name">Name:</label><br><br>
+            <input type="text" id="name" name="name"><br><br>
+            <label for="username">Username:</label><br><br>
+            <input type="text" id="username" name="username"><br><br>
+            <label for="mobileno">Mobile No:</label><br><br>
+            <input type="text" id="mobileno" name="mobileno"><br><br>
+            <label for="email">Email:</label><br><br>
+            <input type="email" id="email" name="email"><br><br>
+            <button type="button" id="saveChanges">Save Changes</button><br>
+            <button type="button" id="cancelEdit">Cancel</button>
+        </form>
+    </div>
+</body>
+</html>

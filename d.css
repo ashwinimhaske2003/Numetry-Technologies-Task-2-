@@ -1,0 +1,115 @@
+/* d.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    padding: 0;
+    background-image: url('https://cdn.pixabay.com/photo/2018/04/28/22/03/tree-3358468_1280.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+}
+
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+    font-family: cursive;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 20px;
+    font-family: cursive;
+    color: rgb(255, 255, 255);
+}
+
+table {
+    width: 80%;
+    margin: 20px auto;
+    border-collapse: collapse;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    animation: fadeIn 0.5s ease-in-out;
+    font-family: cursive;
+    color: rgb(255, 255, 255);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #463058;
+    font-family: cursive;
+    color: white;
+}
+
+button {
+    display: block;
+    margin: 5px auto; /* Changed margin to give space between buttons */
+    padding: 10px 20px;
+    background-color: #4b3758;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #463058;
+}
+
+form {
+    margin-top: 20px;
+}
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+input[type="submit"] {
+    background-color: #4caf50;
+}
+
+#editFormContainer {
+    display: none;
+    height: 600px;
+    width: 400px;
+    margin: 10px auto;
+    
+    background-color: #d7ced4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.edit-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    table th, table td {
+        font-size: 14px;
+    }
+
+    button {
+        padding: 6px 12px;
+    }
+}

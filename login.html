@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="l.css">
+    
+    <script>
+        function loginUser() {
+            var id = document.getElementById('id').value;
+            var name = document.getElementById('name').value;
+
+            var users = JSON.parse(sessionStorage.getItem('users')) || [];
+            var loggedInUser = users.find(function(user) {
+                return user.id == id && user.name == name;
+            });
+
+            if (loggedInUser) {
+                alert('Login successful');
+                window.location.href = "dashboard.html";
+            } else {
+                alert('Invalid ID or Name');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form>
+            <label for="id">ID:</label><br>
+            <input type="text" id="id" name="id"><br>
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br><br>
+            <button type="button" onclick="loginUser()">Login</button>
+    </form>
+</body>
+</html>
